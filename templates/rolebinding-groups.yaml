@@ -1,0 +1,24 @@
+{{- range $namespaceKey, $namespaceObject := .Values.roleBindings }}
+{{- range $roleKey, $roleObject := $namespaceObject }}
+{{- if $roleObject.groups }}
+---
+apiVersion: {{ $.Values.global.apiVersion.clusterRoleBinding }}
+kind: RoleBinding
+metadata:
+  name: "{{ $namespaceKey }}-{{ $roleKey }}-groups"
+  namespace: "{{ $namespaceKey }}"
+roleRef:
+  name: "{{ $roleKey }}"
+subjects:
+{{- range $entityKey, $entityValues := $roleObject }}
+{{- if eq $entityKey "groups" }}
+{{- range $entityValues }}
+- kind: Group
+  name: {{ . | quote }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- end }}
+{{- end }}
+{{- end }}

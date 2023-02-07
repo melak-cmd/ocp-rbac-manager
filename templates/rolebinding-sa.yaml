@@ -1,0 +1,25 @@
+{{- range $namespaceKey, $namespaceObject := .Values.roleBindings }}
+{{- range $roleKey, $roleObject := $namespaceObject }}
+{{- if $roleObject.serviceAccounts }}
+---
+apiVersion: {{ $.Values.global.apiVersion.clusterRoleBinding }}
+kind: RoleBinding
+metadata:
+  name: "{{ $namespaceKey }}-{{ $roleKey }}-sa"
+  namespace: "{{ $namespaceKey }}"
+roleRef:
+  name: "{{ $roleKey }}"
+subjects:
+{{- range $entityKey, $entityValues := $roleObject }}
+{{- if eq $entityKey "serviceAccounts" }}
+{{- range $entityValues }}
+- kind: ServiceAccount
+  namespace: {{ (split "/" .)._0 | quote }}
+  name: {{ (split "/" .)._1 | quote }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- end }}
+{{- end }}
+{{- end }}

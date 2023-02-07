@@ -1,0 +1,24 @@
+{{- range $namespaceKey, $namespaceObject := .Values.roles }}
+{{- range $roleKey, $roleObject := $namespaceObject }}
+{{- if $roleObject.resources }}
+---
+apiVersion: {{ $.Values.global.apiVersion.role }}
+kind: Role
+metadata:
+  name: {{ $roleKey }}
+  namespace: {{ $namespaceKey }}
+rules:
+{{- range $entityKey, $entityValues := $roleObject }}
+{{- range $entityValues }}
+  - apiGroups:
+      - {{ (split "/" .)._0 | quote }}
+    resources:
+      - {{ (split "/" .)._1 | quote }}
+    verbs:
+      - {{ (split "/" .)._2 | quote }}
+{{- end }}
+{{- end }}
+
+{{- end }}
+{{- end }}
+{{- end }}      

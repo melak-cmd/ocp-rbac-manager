@@ -1,0 +1,10 @@
+global:
+  apiVersion:
+    group: user.openshift.io/v1
+    roleBinding: authorization.openshift.io/v1
+    clusterRoleBinding: authorization.openshift.io/v1
+    role: rbac.authorization.k8s.io/v1
+groups: {}
+roleBindings: {}
+clusterRoleBindings: {}
+roles: {}

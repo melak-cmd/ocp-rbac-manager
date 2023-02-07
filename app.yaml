@@ -1,0 +1,80 @@
+groups:
+  corp-app-admin:
+    - amine
+  corp-app-edit:
+    - amine
+  corp-app-view:
+    - amine
+roleBindings:
+  corp-app-cicd:
+    admin:
+      groups:
+        - corp-app-admin
+    edit:
+      groups:
+        - corp-app-edit
+    view:
+      groups:
+        - corp-app-view
+  corp-app-corpv:
+    admin:
+      groups:
+        - corp-app-admin
+    edit:
+      groups:
+        - corp-app-edit
+    view:
+      groups:
+        - corp-app-view
+  corp-app-qua:
+    admin:
+      groups:
+        - corp-app-admin
+    edit:
+      groups:
+        - corp-app-edit
+    view:
+      groups:
+        - corp-app-view
+  corp-app-rct:
+    admin:
+      groups:
+        - corp-app-admin
+    edit:
+      groups:
+        - corp-app-edit
+    view:
+      groups:
+        - corp-app-view
+  corp-app-tvp:
+    admin:
+      groups:
+        - corp-app-admin
+    edit:
+      groups:
+        - corp-app-edit
+    view:
+      groups:
+        - corp-app-view
+  corp-app-prd:
+    admin:
+      groups:
+        - corp-app-admin
+    edit:
+      serviceAccounts:
+        - corp-app-prd/strimzi-cluster-operator
+      groups:
+        - corp-app-edit
+    view:
+      groups:
+        - corp-app-view
+  corp-app-ecommerce:
+    admin:
+      groups:
+        - corp-app-admin
+    edit:
+      groups:
+        - corp-app-edit
+    view:
+      groups:
+        - corp-app-view

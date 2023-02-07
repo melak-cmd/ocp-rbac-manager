@@ -1,0 +1,12 @@
+{{- range $groupKey, $groupObject := $.Values.groups }}
+---
+apiVersion: {{ $.Values.global.apiVersion.group }}
+kind: Group
+metadata:
+  name: {{ $groupKey | quote }}
+users:
+{{- range $groupObject }}
+- {{ . | quote }}
+{{- end }}
+
+{{- end }}
